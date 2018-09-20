@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="{:config('static_admin')}/css/style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" src="{:config('static_admin')}/js/jquery.js"></script>
+    <script language="JavaScript" src="/plugins/PoPlayer/layer.js"></script>
+    <style>
+        .active{
+            border-bottom: solid 3px #66c9f3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#" onclick="back()">上页</a></li>
+        </ul>
+    </div>
+    <div class="formbody">
+        <div class="formtitle">
+            <span class="active">属性信息</span>
+           <!--  <span>商品属性信息</span>
+           <span>商品相册</span>
+           <span>商品描述</span> -->
+
+        </div>
+        <form action="" method="post">
+            <input name='attr_id' type='hidden' value="{$attr_data.attr_id}">
+            <ul class="forminfo">
+                <li>
+                    <label>属性名称</label>
+                    <input name="attr_name" placeholder="请输入权限名称" type="text" class="dfinput" value="{$attr_data.attr_name}" />
+                </li>
+                <li>
+                    <label>商品类型</label>
+                    <select name='type_id' class="dfinput">
+                        <option value=''>请选择商品类型</option>
+                      {volist name='data' id='v'}
+                          <option value="{$v.type_id}">{$v.type_name}</option>
+                      {/volist}
+                    </select>
+                </li>
+                <li>
+                    <label>属性类型</label>
+                    <label><input name='attr_type' type='radio' value='0' >唯一属性</label>
+                    <label><input name='attr_type' type='radio' value='1'>单选属性</label>
+                </li>
+                <li>
+                    <label>录入方式</label>
+                    <label><input name='attr_input_type' type='radio' value='0' >手工输入</label>
+                    <label><input name='attr_input_type' type='radio' value='1'>列表选择</label>
+                </li>
+                <li>
+                    <label>属性值</label>
+                    <textarea name='attr_values' class='textinput' placeholder="属性间请用|分割" >{$attr_data.attr_values}</textarea>
+                </li>
+
+         
+			 <li>
+                    <label>&nbsp;</label>
+                    <input name="" id="btnSubmit"  type="button" class="btn" value="确认保存" />
+             </li>
+        </form>
+    </div>
+</body>
+<script>
+    //保存回显的属性值
+    var attr_values="{$attr_data.attr_values}";
+
+    $('input[name=attr_type][value='+{$attr_data.attr_type}+']').attr('checked',true);
+    $('input[name=attr_input_type][value='+{$attr_data.attr_input_type}+']').attr('checked',true);
+
+    //反显下拉框
+    $('select[name=type_id]').val("{$attr_data.type_id}");
+
+    if($('textarea[name=attr_values]').val()==''){
+        $('textarea[name=attr_values]').attr('disabled',true);
+    }
+
+    //点击事件，当选择手工输入时禁止文本框,列表输入时开启
+    $("input[name=attr_input_type]").click(function(){
+        if($(this).val()=='0'){
+            $('textarea[name=attr_values]').attr('disabled',true).val('');
+        }else{
+            $('textarea[name=attr_values]').attr('disabled',false).val(attr_values);
+        }
+    })
+
+    //回车提交
+    $(document).keyup(function(e){
+        if(e.which==13){
+            $('#btnSubmit').click();
+        }     
+    });
+
+    //点击提交
+   $('#btnSubmit').click(function(){
+        var data=$('form').serialize();
+        $.post("{:url('/admin/Attribute/upd')}",data,function(result){
+            if(result.code==200){
+                layer.msg(result.msg);
+                return;
+            }
+            layer.msg(result.msg);
+        },'json');
+   });
+
+   //点击返回上页
+   function back(){
+        history.back();
+   }
+
+  
+  
+</script>
+
+</html>

@@ -1,0 +1,14 @@
+<div class="viewd leftbar mt10">
+				<h2><a href="javascript:;"  class='clearlookgoods'>清空</a><strong>最近浏览过的商品</strong></h2>
+				<div class="leftbar_wrap">
+					<?php foreach($history_data as $k=>$v){ ?>
+						<li <?php echo $k==5 ? 'class="last"' :'' ?> style='list-style:none'>
+							<dl>
+								<dt><a href="{:url('/home/goods/detail',['goods_id'=>$v.goods_id])}"><img src="/uploads/{:json_decode($v.goods_middle)[0]}" alt="" /></a></dt>
+								<dd><a href="{:url('/home/goods/detail',['goods_id'=>$v.goods_id])}">{$v.goods_name}</a></dd>
+								<dd><strong>￥{$v.goods_price}</strong></dd>
+							</dl>
+						</li>	
+					<?php } ?>
+				</div>
+			</div>

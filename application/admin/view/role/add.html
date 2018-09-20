@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <link href="{:config('static_admin')}/css/style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript" src="{:config('static_admin')}/js/jquery.js"></script>
+    <script language="JavaScript" src="/plugins/PoPlayer/layer.js"></script>
+    <style>
+        .active{
+            border-bottom: solid 3px #66c9f3;
+        }
+        .box th, .box td{border: 1px solid #ccc;}
+        .box b{color:blue;}
+        li{list-style: none;}
+        .box .ul_f{float:left;} 
+        .box .son{padding-left: 10px;}
+    </style>
+</head>
+
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">角色管理</a></li>
+        </ul>
+    </div>
+    <div class="formbody">
+        <div class="formtitle">
+            <span class="active">角色信息</span>
+        </div>
+        <form action="" method="post">
+            <ul class="forminfo">
+                <li>
+                    <label>角色名称</label>
+                    <input name="role_name" placeholder="请输入权限名称" type="text" class="dfinput" />
+                </li>
+            <table width="600px" border="1px" rules="all" class="box">
+            <?php foreach($pid[0] as $one){ ?>
+                <tr>
+                    <th>
+                        <label><input name='auth_ids_list[]' type="checkbox" value="<?php echo $auth[$one]['auth_id'] ?>" onclick="auth_all(this)" ><?php echo $auth[$one]['auth_name'] ?></label>
+                    </th>
+                  <?php foreach($pid[$one] as $two){ ?>
+                    <td>
+                        <ul class="ul_f">
+                            <b>
+                                 <label><input name='auth_ids_list[]' type="checkbox" value="<?php echo $auth[$two]['auth_id'] ?>" onclick='auth_all(this);auth_up(this,"{$auth[$one]['auth_id']}")' ><?php echo $auth[$two]['auth_name'] ?></label>
+                            </b>
+                         <?php foreach($pid[$two] as $three){ ?>
+                            <ul>
+                                <li class="son">
+                                     <label><input name='auth_ids_list[]' type="checkbox" value="<?php echo $auth[$three]['auth_id'] ?>" onclick='auth_all(this);auth_up(this,"{$auth[$one]['auth_id']},{$auth[$two]['auth_id']}")' ><?php echo $auth[$three]['auth_name'] ?></label>
+                                </li>
+                            </ul>
+                         <?php }; ?>
+                        </ul>
+                    </td>
+                  <?php }; ?>
+                </tr>
+            <?php }; ?>
+            </table>
+            <li>
+                <label>&nbsp;</label>
+                <input name="" id="btnSubmit"  type="button" class="btn" value="确认保存" />
+             </li>
+        </form>
+    </div>
+</body>
+<script>
+    //回车提交
+    $(document).keyup(function(e){
+        if(e.which==13){
+            $('#btnSubmit').click();
+        }     
+    });
+
+    //点击提交
+   $('#btnSubmit').click(function(){
+        var data=$('form').serialize();
+        $.post("{:url('/admin/role/add')}",data,function(result){
+            if(result.code==200){
+                layer.msg(result.msg);
+                return;
+            }
+            layer.msg(result.msg);
+        },'json');
+   });
+
+    //点击顶级权限时全选
+    function auth_all(ele){
+        $(ele).parent().parent().nextAll().find("input[type=checkbox]").attr('checked',$(ele).prop('checked'));
+    }
+
+    //点击子权限时自动勾选父权限
+    function auth_up(ele,id){
+        var id_arr=id.split(',');
+        for(var i=0;i<id_arr.length;i++){
+            $('input[type=checkbox][value='+id_arr[i]+']').attr('checked',true);
+        }
+
+        //自动取消勾选
+       if($(ele).parents('tr').children('td').find('input:checked').length==0){
+            $(ele).parents('tr').children('th').find('input').attr('checked',false);
+       }
+    }
+</script>
+
+</html>

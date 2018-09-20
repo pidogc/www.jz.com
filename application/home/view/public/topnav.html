@@ -1,0 +1,40 @@
+<div class="topnav">
+		<div class="topnav_bd w1210 bc">
+			<div class="topnav_left">
+				
+			</div>
+			<div class="topnav_right fr">
+				<ul id='nav_login'>
+				<!-- >
+					<li>
+						您好，{:session('username')}欢迎来到Ori！
+						[<a href="{:url('/home/public/loginout')}">退出</a>] 
+						[<a href="{:url('/home/public/register')}">免费注册</a>]
+						<li class="line">|</li>
+						<li>我的订单</li>
+						<li class="line">|</li>
+						<li>客户服务</li>
+					</li> -->
+					<?php if(!session('username')){ ?>
+					<li>
+						您好，欢迎来到Ori！
+						[<a href="{:url('/home/public/login')}">登录</a>]
+						[<a href="javascript:;" class='login'>登录(弹框)</a>]
+						[<a href="{:url('/home/public/register')}">免费注册</a>]
+					</li>
+					<li class="line">|</li>
+					<li>我的订单</li>
+					<li class="line">|</li>
+					<li>客户服务</li>
+					<?php }else{ ?>
+					<li>
+						您好，{:session('username')}欢迎来到Ori！
+						[<a href='javascript:;' id='loginout'>退出</a>]
+						<li class='line'>|</li><a href='{:url("/home/order/selforder")}' ><li>我的订单</li></a>
+						<li class='line'>|</li><li>客户服务</li>
+					</li>
+					<?php } ?>
+				</ul>
+			</div>
+		</div>
+	</div>
