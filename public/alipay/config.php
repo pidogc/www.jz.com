@@ -1,0 +1,26 @@
+<?php
+$config = array (	
+		//应用ID,您的APPID。
+		'app_id' => "2016091700529432",
+
+		//商户私钥
+		'merchant_private_key' => "MIIEowIBAAKCAQEAxRWspz4Nl1AnnK2wDvhlphfsAJmsQX92VXeaQFVPbjXjir1ZSygeMQGtzdO1UQ+jRWnkHIlhg5KR2gEqOxfTzaVE36ataK/dOxiB3D/1zifKWnGEw2VbiSj8JNAGeRRTa3boMynBSr9piFJevh5s8YDe4m4IJmyFTEPSCGCyXQQWFba3VDvsj0+u2++1okZue7rFprUiOWLhRFJjNKWAmHaUMt3KHH4mcEk7VeA1Fme1WBiXGvBEgRg9KJmJPLXSRVevsrZtmmOsRJIfrRhps4tfMgzboplVgwLu+P9ASgecfnTyTeEX+uYRsaEoE4Ce6v506HJ+7DSoAF/vcgkcrQIDAQABAoIBAFjq7nqGBJvADh8iPcyDRVkqcc/ThWQHndvxmiZsVuniZkayJxdBgl2Z5FB4s9VeuMsYe1JkqRozhppU7Di9B1JAvlIpYRNaRPXkmLJGKSBZ03H6xWtiz2mSlDAHquP1x600eI6cyBhxQ6u9fgFIuN48xlJiUksDqyA9eQVOmypbYZMnl/eRs6Gd1/85+To4nlcT2O6pfk8NJg1m8Qwy67aECVQhFYYkdZp71Z6mgekdkbIgwrjAcjYUBW8pseiaCOkHkfHYjkifY7itLlnFxw4ReU9ItrwIWbq8380W0uEZBlB1p3rx/SViNPIUwDJT3aE/CHqI2QNt1+yAso9IUgECgYEA/BHikJNPIXXmiQBC201LEN9RH6QAjEkfUdIHLY9UlwVRKJwyZibYbnrERDTOuEYZE4GAG+Y0GKbkgT82uLZFhu1htNQmWUjCQgsILpeBa23GFkrSzmpW9fpUAz30gBSAIv/VoNFc7nJPUiE74S2QpNphG1ec0e6qGzWhxqAM75sCgYEAyChSHZ41j+tEobpF2m8l0da2zv5AYwZURy6UXac4mfpaD/NkqFRz4qKHUcY6NcCE+uobWS8qnzCW9YMFb/N+06D2BgI2T+AyNWAuLN5IBmmTWcwOx1xI1Yh80ie6rowlDjEU3CXarBoMi9sd6kzUIg4maJUeGGHGth9PEWi/fVcCgYEAjugI3dRWIW85QuSeArzAWRFyaZDOKrpuAjIjlaXT3EbMa0yamiVdwMzjJpQVuo0rPE7H9Yk+cdd0Zv4SpQfZRRShtyYrk6TXVR/yBJAqdGBo1EyZVSMeqBfCt4/RZSe6OZ13XNQ1bo3qAHMNAq2VepDASwMRykcXs5NlYzlr/A8CgYA2WRRq7GF40ZYSH+UFubZYMufyboEHIlnR9ijdASHSVXMM77a+KihJOn5pytxVag/xnY2Neswk62miAlCApGokhokm+oTKzYJ0kcgX8Mc3zoTvFgRRR5KTQHs8CQOcj3skTlluqWyl3HDZrMaDrxbOpG7zaMICNtJg80Fh5cJRAwKBgEsD5LKlA9d5Lzq7Ihz2R5m+sPGsk2w/qiwntsQOjWB6ScU/1hN+XufR/L1aDxuP44T0EFmbL+fiR1HWf1LMyFVk9gGRLHItS8pD3S2tIF73Hghml75+EWueSBj6nyauvYp3mgjPQB0j3zNBDpTMq3gFlIqDCFlxuGNY2dZnVGlr",
+		
+		//异步通知地址
+		'notify_url' => "http://外网可访问网关地址/alipay.trade.page.pay-PHP-UTF-8/notify_url.php",
+		
+		//同步跳转
+		'return_url' => "http://外网可访问网关地址/alipay.trade.page.pay-PHP-UTF-8/return_url.php",
+
+		//编码格式
+		'charset' => "UTF-8",
+
+		//签名方式
+		'sign_type'=>"RSA2",
+
+		//支付宝网关
+		'gatewayUrl' => "https://openapi.alipaydev.com/gateway.do",
+
+		//支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
+		'alipay_public_key' => "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAysbzH70GBXyA6vtistWFE5qQVYmwl3D4MVF0TofIFR1bCCHTig6BelHRpZPc6UKL88DEssPXPVEUOTEw9/GFxIi9iHkmH2zsZkg8FXagnY1wtdYlLeHnnqkIeb6y6rp8p7k4GOjrbbY8it29y30Cz0mVhzU356iL0kwmNMqzyQHslRiKtyw60fJSJSRRHHPPgvdIiYuCIfVtoNdVe83UPuhvW4eRxhv8iaGMVheLQJzkxJXKcR6HurBIywWbTDGBzgGtvGurbXHKG/9FbYn6vAcWL/x8fpgD9mk6EOkMFHQrDqf0V+e5p5zHziyO5yZc1uLw7V5wvQRp0g44NfkpcQIDAQAB",
+);
